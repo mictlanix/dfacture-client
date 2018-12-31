@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Mictlanix.DFactureClient</id>
+    <version>3.3.0-beta</version>
+    <title>Mictlanix DFacture Client</title>
+    <authors>Eddy Zavaleta</authors>
+    <owners/>
+    <licenseUrl>https://github.com/mictlanix/dfacture-client/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mictlanix/dfacture-client</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET client library for DFacture web services (dfacture.com)</description>
+    <releaseNotes>CFD v3.3 support (beta).</releaseNotes>
+    <copyright>Copyright © 2018 Mictlanix SAS de CV</copyright>
+    <tags>cfdi factura invoice web services api client library .net</tags>
+    <dependencies>
+      <dependency id="Mictlanix.CFDLib" version="3.3.0-beta6" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="src/Mictlanix.DFactureClient/bin/Release/Mictlanix.DFactureClient.dll" target="lib/net45" />
+  </files>
+</package>

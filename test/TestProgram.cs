@@ -46,9 +46,10 @@ namespace Tests {
 
 		static void Main (string [] args)
 		{
-			StampTest ();
+			//StampTest ();
 			//StampNominaTest ();
 			//StampPagosTest ();
+			StampCreditNoteTest ();
 			//GetStampTest ();
 			//CancelTest ();
 			//CancelAckTest ();
@@ -62,6 +63,8 @@ namespace Tests {
 
 			AddItems (cfd, "Product", 3);
 			cfd.Sign (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE), Encoding.UTF8.GetBytes (CSD_PRIVATE_KEY_PWD));
+
+			Console.WriteLine (cfd.ToXmlString ());
 
 			var tfd = cli.Stamp (cfd);
 			Console.WriteLine (tfd.ToXmlString ());
@@ -114,6 +117,24 @@ namespace Tests {
 			File.WriteAllText ("pagos-signed.xml", cfd.ToXmlString ());
 		}
 
+		static void StampCreditNoteTest ()
+		{
+			var cfd = CreateCreditNoteCFD ();
+			var cli = new DFactureClient (USERNAME, PASSWORD, DFactureClient.URL_TEST);
+
+			cfd.Sign (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE), Encoding.UTF8.GetBytes (CSD_PRIVATE_KEY_PWD));
+
+			var tfd = cli.Stamp (cfd);
+			Console.WriteLine (tfd.ToXmlString ());
+			Console.WriteLine (tfd);
+
+			cfd.Complemento = new List<object> ();
+			cfd.Complemento.Add (tfd);
+
+			Console.WriteLine (cfd.ToXmlString ());
+			Console.WriteLine (cfd);
+		}
+
 		static void GetStampTest ()
 		{
 			var cli = new DFactureClient (USERNAME, PASSWORD, DFactureClient.URL_TEST);
@@ -145,8 +166,11 @@ namespace Tests {
 				Fecha = TEST_DATE,
 				LugarExpedicion = "03810", // código postal
 				MetodoPago = c_MetodoPago.PagoEnUnaSolaExhibicion,
+				MetodoPagoSpecified = true,
 				FormaPago = c_FormaPago.Efectivo,
+				FormaPagoSpecified = true,
 				TipoCambio = 1m,
+				TipoCambioSpecified = true,
 				Moneda = "MXN",
 				NoCertificado = "30001000000300023708",
 				Certificado = Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
@@ -160,7 +184,7 @@ namespace Tests {
 					Nombre = "DEMO COMPANY SC",
 					UsoCFDI = c_UsoCFDI.AdquisicionDeMercancias
 				},
-				Impuestos = new ComprobanteImpuestos ()
+				Impuestos = new ComprobanteImpuestos (),
 			};
 
 			return cfd;
@@ -514,14 +538,14 @@ namespace Tests {
 				Total = 0,
 				TipoDeComprobante = c_TipoDeComprobante.Pago,
 				LugarExpedicion = "03810", // código postal
-							   //CfdiRelacionados = new ComprobanteCfdiRelacionados {
-							   //	TipoRelacion = c_TipoRelacion.Sustitucion,
-							   //	CfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado [] {
-							   //		new ComprobanteCfdiRelacionadosCfdiRelacionado {
-							   //			UUID = "B1930368-6194-447D-8F41-95FAF528E72B"
-							   //		}
-							   //	}
-							   //},
+				//CfdiRelacionados = new ComprobanteCfdiRelacionados {
+				//	TipoRelacion = c_TipoRelacion.Sustitucion,
+				//	CfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado [] {
+				//		new ComprobanteCfdiRelacionadosCfdiRelacionado {
+				//			UUID = "B1930368-6194-447D-8F41-95FAF528E72B"
+				//		}
+				//	}
+				//},
 				Emisor = new ComprobanteEmisor {
 					Rfc = "AAA010101AAA",
 					Nombre = "ACME SC",
@@ -546,6 +570,59 @@ namespace Tests {
 			};
 
 			cfd.Complemento.Add (pagos);
+
+			return cfd;
+		}
+
+		static Comprobante CreateCreditNoteCFD ()
+		{
+			var cfd = new Comprobante {
+				TipoDeComprobante = c_TipoDeComprobante.Ingreso,
+				Serie = "A",
+				Folio = "1",
+				Fecha = TEST_DATE,
+				LugarExpedicion = "03810", // código postal
+				MetodoPago = c_MetodoPago.PagoEnUnaSolaExhibicion,
+				MetodoPagoSpecified = true,
+				FormaPago = c_FormaPago.PorDefinir,
+				FormaPagoSpecified = true,
+				TipoCambio = 1m,
+				TipoCambioSpecified = true,
+				Moneda = "MXN",
+				NoCertificado = "30001000000300023708",
+				Certificado = Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
+				Emisor = new ComprobanteEmisor {
+					Rfc = "AAA010101AAA",
+					Nombre = "ACME SC",
+					RegimenFiscal = c_RegimenFiscal.GeneralDeLeyPersonasMorales,
+				},
+				Receptor = new ComprobanteReceptor {
+					Rfc = "XAXX010101000",
+					Nombre = "DEMO COMPANY SC",
+					UsoCFDI = c_UsoCFDI.AdquisicionDeMercancias
+				},
+				Conceptos = new ComprobanteConcepto [] {
+					new ComprobanteConcepto {
+						ClaveProdServ = "84111506",
+						Cantidad = 1,
+						ClaveUnidad = "ACT",
+						Descripcion= "% del saldo de todos los CFDI relacionados",
+						ValorUnitario = 100,
+						Importe = 100
+					}
+				},
+				CfdiRelacionados = new ComprobanteCfdiRelacionados {
+					TipoRelacion = c_TipoRelacion.NotaDeCredito,
+					CfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado [] {
+						new ComprobanteCfdiRelacionadosCfdiRelacionado {
+							UUID = "d291a911-6476-4c79-a9c8-0ccddfe00858"
+						}
+					}
+				},
+			};
+
+			cfd.SubTotal = cfd.Conceptos.Sum (x => x.Importe);
+			cfd.Total = cfd.Conceptos.Sum (x => x.Importe);
 
 			return cfd;
 		}

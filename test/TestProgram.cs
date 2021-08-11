@@ -33,8 +33,8 @@ using Mictlanix.DFacture.Client;
 
 namespace Tests {
 	public class TestProgram {
-		const string CSD_CERTIFICATE_FILE = "CSD01_AAA010101AAA.cer";
-		const string CSD_PRIVATE_KEY_FILE = "CSD01_AAA010101AAA.key";
+		const string CSD_CERTIFICATE_FILE = "CSD_H&E951128469.cer";
+		const string CSD_PRIVATE_KEY_FILE = "CSD_H&E951128469.key";
 		const string CSD_PRIVATE_KEY_PWD = "12345678a";
 		const string USERNAME = "DEMODaysoft";
 		const string PASSWORD = "cfdi";
@@ -46,10 +46,10 @@ namespace Tests {
 
 		static void Main (string [] args)
 		{
-			//StampTest ();
+			StampTest ();
 			//StampNominaTest ();
 			//StampPagosTest ();
-			StampCreditNoteTest ();
+			//StampCreditNoteTest ();
 			//GetStampTest ();
 			//CancelTest ();
 			//CancelAckTest ();
@@ -60,8 +60,23 @@ namespace Tests {
 		{
 			var cfd = CreateCFD ();
 			var cli = new DFactureClient (USERNAME, PASSWORD, DFactureClient.URL_TEST);
+			var implocal = new ImpuestosLocalesRetencionesLocales {
+				ImpLocRetenido = "5 A l millar",
+				Importe = cfd.SubTotal * 0.005m,
+				TasadeRetencion = 0.50m
+			};
 
 			AddItems (cfd, "Product", 3);
+
+			//cfd.Complemento = new List<object> ();
+			//cfd.Complemento.Add (new ImpuestosLocales {
+			//	TotaldeRetenciones = 76.50m,
+			//	RetencionesLocales = new ImpuestosLocalesRetencionesLocales [] {
+			//		implocal
+			//	}
+			//});
+			//cfd.Total -= implocal.Importe;
+
 			cfd.Sign (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE), Encoding.UTF8.GetBytes (CSD_PRIVATE_KEY_PWD));
 
 			Console.WriteLine (cfd.ToXmlString ());
@@ -70,7 +85,6 @@ namespace Tests {
 			Console.WriteLine (tfd.ToXmlString ());
 			Console.WriteLine (tfd.ToString ());
 
-			cfd.Complemento = new List<object> ();
 			cfd.Complemento.Add (tfd);
 
 			Console.WriteLine (cfd.ToXmlString ());
@@ -138,7 +152,7 @@ namespace Tests {
 		static void GetStampTest ()
 		{
 			var cli = new DFactureClient (USERNAME, PASSWORD, DFactureClient.URL_TEST);
-			var tfd = cli.GetStamp ("AAA010101AAA", "25D0B1B7-2FAE-4E92-BDE1-CF26AA1FBA22");
+			var tfd = cli.GetStamp ("H&E951128469", "25D0B1B7-2FAE-4E92-BDE1-CF26AA1FBA22");
 
 			Console.WriteLine (tfd.ToString ());
 			Console.WriteLine (tfd.ToXmlString ());
@@ -147,7 +161,7 @@ namespace Tests {
 		static void CancelTest ()
 		{
 			var cli = new DFactureClient (USERNAME, PASSWORD, DFactureClient.URL_TEST);
-			var ret = cli.Cancel ("AAA010101AAA", "XAXX010101000", "25D0B1B7-2FAE-4E92-BDE1-CF26AA1FBA22", "81.20",
+			var ret = cli.Cancel ("H&E951128469", "XAXX010101000", "25D0B1B7-2FAE-4E92-BDE1-CF26AA1FBA22", "81.20",
 					      Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
 					      Convert.ToBase64String (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE)),
 						CSD_PRIVATE_KEY_PWD);
@@ -172,11 +186,11 @@ namespace Tests {
 				TipoCambio = 1m,
 				TipoCambioSpecified = true,
 				Moneda = "MXN",
-				NoCertificado = "30001000000300023708",
+				NoCertificado = "30001000000400002463",
 				Certificado = Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
 				Emisor = new ComprobanteEmisor {
-					Rfc = "AAA010101AAA",
-					Nombre = "ACME SC",
+					Rfc = "H&E951128469",
+					Nombre = "HERRERIA & ELECTRICOS S DE CV",
 					RegimenFiscal = c_RegimenFiscal.GeneralDeLeyPersonasMorales,
 				},
 				Receptor = new ComprobanteReceptor {
@@ -450,8 +464,8 @@ namespace Tests {
 				//Confirmacion = "",
 				//CfdiRelacionados = new ComprobanteCfdiRelacionados (),
 				Emisor = new ComprobanteEmisor {
-					Rfc = "AAA010101AAA",
-					Nombre = "ACME SC",
+					Rfc = "H&E951128469",
+					Nombre = "HERRERIA & ELECTRICOS S DE CV",
 					RegimenFiscal = c_RegimenFiscal.GeneralDeLeyPersonasMorales,
 				},
 				Receptor = new ComprobanteReceptor {
@@ -547,8 +561,8 @@ namespace Tests {
 				//	}
 				//},
 				Emisor = new ComprobanteEmisor {
-					Rfc = "AAA010101AAA",
-					Nombre = "ACME SC",
+					Rfc = "H&E951128469",
+					Nombre = "HERRERIA & ELECTRICOS S DE CV",
 					RegimenFiscal = c_RegimenFiscal.GeneralDeLeyPersonasMorales,
 				},
 				Receptor = new ComprobanteReceptor {
@@ -589,11 +603,11 @@ namespace Tests {
 				TipoCambio = 1m,
 				TipoCambioSpecified = true,
 				Moneda = "MXN",
-				NoCertificado = "30001000000300023708",
+				NoCertificado = "30001000000400002463",
 				Certificado = Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
 				Emisor = new ComprobanteEmisor {
-					Rfc = "AAA010101AAA",
-					Nombre = "ACME SC",
+					Rfc = "H&E951128469",
+					Nombre = "HERRERIA & ELECTRICOS S DE CV",
 					RegimenFiscal = c_RegimenFiscal.GeneralDeLeyPersonasMorales,
 				},
 				Receptor = new ComprobanteReceptor {

@@ -32,10 +32,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Mictlanix.CFDLib">
-      <HintPath>..\..\packages\Mictlanix.CFDLib.3.3.0-beta6\lib\net45\Mictlanix.CFDLib.dll</HintPath>
+      <HintPath>..\..\packages\Mictlanix.CFDLib.3.3.0-beta7\lib\net45\Mictlanix.CFDLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

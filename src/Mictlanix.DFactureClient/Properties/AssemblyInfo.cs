@@ -19,4 +19,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyVersion ("3.2.99")]
 [assembly: AssemblyFileVersion ("3.2.99")]
-[assembly: AssemblyInformationalVersion ("3.3.0-beta")]
+[assembly: AssemblyInformationalVersion ("3.3.0-beta2")]

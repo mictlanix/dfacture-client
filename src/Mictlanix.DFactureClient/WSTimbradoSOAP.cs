@@ -1889,7 +1889,7 @@ namespace Mictlanix.DFacture.Client.Internals {
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
 [System.ServiceModel.ServiceContractAttribute (ConfigurationName = "IWSTimbradoSOAP")]
-public interface IWSTimbradoSOAP {
+internal interface IWSTimbradoSOAP {
 
 	[System.ServiceModel.OperationContractAttribute (Action = "http://tempuri.org/IWSTimbradoSOAP/TimbrarCFDI33", ReplyAction = "http://tempuri.org/IWSTimbradoSOAP/TimbrarCFDI33Response")]
 	Mictlanix.DFacture.Client.Internals.RespuestaTFD33 TimbrarCFDI33 (string user, string password, string xml);
@@ -1974,7 +1974,7 @@ public interface IWSTimbradoSOAP {
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-public interface IWSTimbradoSOAPChannel : IWSTimbradoSOAP, System.ServiceModel.IClientChannel {
+internal interface IWSTimbradoSOAPChannel : IWSTimbradoSOAP, System.ServiceModel.IClientChannel {
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute ()]

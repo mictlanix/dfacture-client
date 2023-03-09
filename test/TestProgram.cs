@@ -46,13 +46,12 @@ namespace Tests {
 
 		static void Main (string [] args)
 		{
-			StampTest ();
+			//StampTest ();
 			//StampNominaTest ();
 			//StampPagosTest ();
 			//StampCreditNoteTest ();
 			//GetStampTest ();
-			//CancelTest ();
-			//CancelAckTest ();
+			CancelTest ();
 			//SaveIssuerTest ();
 		}
 
@@ -164,7 +163,7 @@ namespace Tests {
 			var ret = cli.Cancel ("H&E951128469", "XAXX010101000", "25D0B1B7-2FAE-4E92-BDE1-CF26AA1FBA22", "81.20",
 					      Convert.ToBase64String (File.ReadAllBytes (CSD_CERTIFICATE_FILE)),
 					      Convert.ToBase64String (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE)),
-						CSD_PRIVATE_KEY_PWD);
+						CSD_PRIVATE_KEY_PWD, "02", null);
 
 			Console.WriteLine ("Cancel: {0}", ret);
 		}
@@ -552,14 +551,14 @@ namespace Tests {
 				Total = 0,
 				TipoDeComprobante = c_TipoDeComprobante.Pago,
 				LugarExpedicion = "03810", // código postal
-				//CfdiRelacionados = new ComprobanteCfdiRelacionados {
-				//	TipoRelacion = c_TipoRelacion.Sustitucion,
-				//	CfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado [] {
-				//		new ComprobanteCfdiRelacionadosCfdiRelacionado {
-				//			UUID = "B1930368-6194-447D-8F41-95FAF528E72B"
-				//		}
-				//	}
-				//},
+							   //CfdiRelacionados = new ComprobanteCfdiRelacionados {
+							   //	TipoRelacion = c_TipoRelacion.Sustitucion,
+							   //	CfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado [] {
+							   //		new ComprobanteCfdiRelacionadosCfdiRelacionado {
+							   //			UUID = "B1930368-6194-447D-8F41-95FAF528E72B"
+							   //		}
+							   //	}
+							   //},
 				Emisor = new ComprobanteEmisor {
 					Rfc = "H&E951128469",
 					Nombre = "HERRERIA & ELECTRICOS S DE CV",

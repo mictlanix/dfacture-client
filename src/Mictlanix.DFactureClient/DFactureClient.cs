@@ -194,14 +194,14 @@ namespace Mictlanix.DFacture.Client {
 			};
 		}
 
-		public bool Cancel (string issuer, string recipient, string uuid, string total, string cert, string privKey, string privKeyPassword)
+		public bool Cancel (string issuer, string recipient, string uuid, string total, string cert, string privKey, string privKeyPassword, string reason, string uuidRelated)
 		{
 			using (var ws = new WSTimbradoSOAPClient (binding, address)) {
-				var response = ws.CancelarCFDI (Username, Password, issuer, recipient, uuid.ToUpper (), total, cert, privKey, privKeyPassword);
+				var response = ws.CancelarCFDI (Username, Password, issuer, recipient, uuid.ToUpper (), total, cert, privKey, privKeyPassword, reason, uuidRelated);
 				string err_number = response.codigo;
 				string err_description = response.mensaje;
 
-				if (err_number != "201" && err_number != "214") {
+				if (err_number != "201" && err_number != "202" && err_number != "214") {
 					throw new DFactureClientException (err_number, err_description);
 				}
 			}

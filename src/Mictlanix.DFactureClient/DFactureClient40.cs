@@ -30,14 +30,13 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
 using System.Xml;
-using Mictlanix.CFDv33;
-//using Mictlanix.CFDv40;
+using Mictlanix.CFDv40;
 using Mictlanix.DFacture.Client.Internals;
 
-namespace Mictlanix.DFacture.Client {
-	public class DFactureClient {
+namespace Mictlanix.DFacture.Client40 {
+	public class DFactureClient40 {
 		public static string URL_PRODUCTION = @"https://timbradosoap.solucionesdfacture.com/WSTimbradoSOAP.svc";
-		public static string URL_TEST = @"http://timbradosoap.testsolucionesdfacture.com/WSTimbradoSOAP.svc";
+		public static string URL_TEST = @"http://timbradosoap33.testdfacture.com/WSTimbradoSOAP.svc";
 
 		static readonly BasicHttpBinding binding = new BasicHttpBinding (BasicHttpSecurityMode.Transport) {
 			MaxBufferPoolSize = int.MaxValue,
@@ -54,11 +53,11 @@ namespace Mictlanix.DFacture.Client {
 		string url;
 		EndpointAddress address;
 
-		public DFactureClient (string username, string password) : this (username, password, URL_PRODUCTION)
+		public DFactureClient40 (string username, string password) : this (username, password, URL_PRODUCTION)
 		{
 		}
 
-		public DFactureClient (string username, string password, string url)
+		public DFactureClient40 (string username, string password, string url)
 		{
 			Username = username;
 			Password = password;
@@ -125,7 +124,7 @@ namespace Mictlanix.DFacture.Client {
 				string err_description = response.mensaje;
 
 				if (err_number != "100") {
-					throw new DFactureClientException (err_number, err_description);
+					throw new DFactureClientException40 (err_number, err_description);
 				}
 
 				xml_response = Encoding.UTF8.GetString (Convert.FromBase64String (response.xml));
@@ -141,7 +140,7 @@ namespace Mictlanix.DFacture.Client {
 			}
 
 			if (tfd == null) {
-				throw new DFactureClientException ("TimbreFiscalDigital not found.");
+				throw new DFactureClientException40 ("TimbreFiscalDigital not found.");
 			}
 
 			return new TimbreFiscalDigital {
@@ -166,7 +165,7 @@ namespace Mictlanix.DFacture.Client {
 				string err_description = response.mensaje;
 
 				if (err_number != "100") {
-					throw new DFactureClientException (err_number, err_description);
+					throw new DFactureClientException40 (err_number, err_description);
 				}
 
 				xml_response = Encoding.UTF8.GetString (Convert.FromBase64String (response.xml));
@@ -182,7 +181,7 @@ namespace Mictlanix.DFacture.Client {
 			}
 
 			if (tfd == null) {
-				throw new DFactureClientException ("TimbreFiscalDigital not found.");
+				throw new DFactureClientException40 ("TimbreFiscalDigital not found.");
 			}
 
 			return new TimbreFiscalDigital {
@@ -204,7 +203,7 @@ namespace Mictlanix.DFacture.Client {
 				string err_description = response.mensaje;
 
 				if (err_number != "201" && err_number != "202" && err_number != "214") {
-					throw new DFactureClientException (err_number, err_description);
+					throw new DFactureClientException40 (err_number, err_description);
 				}
 			}
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,11 +34,10 @@
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>..\..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Mictlanix.CFDLib">
-      <HintPath>..\..\packages\Mictlanix.CFDLib.3.3.0-beta7\lib\net45\Mictlanix.CFDLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DFactureClient40.cs" />
+    <Compile Include="DFactureClientException40.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WSTimbradoSOAP.cs" />
     <Compile Include="DFactureClient.cs" />
@@ -46,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\cfdlib\src\Mictlanix.CFDLib.csproj">
+      <Project>{63ebacd8-7bb0-480f-81bf-5e0690b27112}</Project>
+      <Name>Mictlanix.CFDLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

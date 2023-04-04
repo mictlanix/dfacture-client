@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,14 +31,25 @@
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Mictlanix.CFDLib">
-      <HintPath>..\packages\Mictlanix.CFDLib.3.3.0-beta7\lib\net45\Mictlanix.CFDLib.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestProgram.cs" />
+    <Compile Include="TestProgram40.cs" />
+    <Compile Include="TestProgram33.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CSD_Escuela_Kemper_Urgate_EKU9003173C9_20190617_131753.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CSD_Escuela_Kemper_Urgate_EKU9003173C9_20190617_131753s.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LOO121212AD4.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LOO121212AD4.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="CSD_H&amp;E951128469.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -48,6 +59,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\cfdlib\src\Mictlanix.CFDLib.csproj">
+      <Project>{63ebacd8-7bb0-480f-81bf-5e0690b27112}</Project>
+      <Name>Mictlanix.CFDLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\src\Mictlanix.DFactureClient\Mictlanix.DFactureClient.csproj">
       <Project>{9CAAE36D-F2B9-41CC-8AB3-F02C5A49229E}</Project>
       <Name>Mictlanix.DFactureClient</Name>

@@ -1,4 +1,4 @@
-﻿//
+//
 // TestProgram.cs
 //
 // Author:
@@ -32,7 +32,7 @@ using Mictlanix.CFDv33;
 using Mictlanix.DFacture.Client;
 
 namespace Tests {
-	public class TestProgram {
+	public class TestProgram33 {
 		const string CSD_CERTIFICATE_FILE = "CSD_H&E951128469.cer";
 		const string CSD_PRIVATE_KEY_FILE = "CSD_H&E951128469.key";
 		const string CSD_PRIVATE_KEY_PWD = "12345678a";
@@ -44,14 +44,14 @@ namespace Tests {
 							  NOW.Hour, NOW.Minute, NOW.Second, DateTimeKind.Unspecified);
 		//static DateTime TEST_DATE = new DateTime (2016, 02, 09, 10, 11, 12, DateTimeKind.Unspecified);
 
-		static void Main (string [] args)
+		static void Main33 (string [] args)
 		{
-			//StampTest ();
+			StampTest ();
 			//StampNominaTest ();
 			//StampPagosTest ();
 			//StampCreditNoteTest ();
 			//GetStampTest ();
-			CancelTest ();
+			//CancelTest ();
 			//SaveIssuerTest ();
 		}
 
@@ -80,7 +80,9 @@ namespace Tests {
 
 			Console.WriteLine (cfd.ToXmlString ());
 
-			var tfd = cli.Stamp (cfd);
+			/*
+			 * cambiar la referencia a 33 en dfacture
+			 * var tfd = cli.Stamp (cfd);
 			Console.WriteLine (tfd.ToXmlString ());
 			Console.WriteLine (tfd.ToString ());
 
@@ -88,6 +90,7 @@ namespace Tests {
 
 			Console.WriteLine (cfd.ToXmlString ());
 			Console.WriteLine (cfd.ToString ());
+			*/
 		}
 
 		static void StampNominaTest ()
@@ -99,6 +102,9 @@ namespace Tests {
 
 			File.WriteAllText ("nomina.xml", cfd.ToXmlString ());
 
+			/*
+			 * cambiar la referencia a 33 en dfacture
+			 * var tfd = cli.Stamp (cfd);
 			var tfd = cli.Stamp (cfd);
 			Console.WriteLine (tfd.ToXmlString ());
 			Console.WriteLine (tfd.ToString ());
@@ -108,6 +114,7 @@ namespace Tests {
 			Console.WriteLine (cfd.ToXmlString ());
 			Console.WriteLine (cfd.ToString ());
 			File.WriteAllText ("nomina-signed.xml", cfd.ToXmlString ());
+			*/
 		}
 
 		static void StampPagosTest ()
@@ -119,7 +126,9 @@ namespace Tests {
 
 			File.WriteAllText ("pagos.xml", cfd.ToXmlString ());
 
-			var tfd = cli.Stamp (cfd);
+			/*
+			 * cambiar la referencia a 33 en dfacture
+			 * var tfd = cli.Stamp (cfd);var tfd = cli.Stamp (cfd);
 			Console.WriteLine (tfd.ToXmlString ());
 			Console.WriteLine (tfd.ToString ());
 
@@ -128,6 +137,7 @@ namespace Tests {
 			Console.WriteLine (cfd.ToXmlString ());
 			Console.WriteLine (cfd.ToString ());
 			File.WriteAllText ("pagos-signed.xml", cfd.ToXmlString ());
+			*/
 		}
 
 		static void StampCreditNoteTest ()
@@ -137,6 +147,9 @@ namespace Tests {
 
 			cfd.Sign (File.ReadAllBytes (CSD_PRIVATE_KEY_FILE), Encoding.UTF8.GetBytes (CSD_PRIVATE_KEY_PWD));
 
+			/*
+			 * cambiar la referencia a 33 en dfacture
+			 * var tfd = cli.Stamp (cfd);
 			var tfd = cli.Stamp (cfd);
 			Console.WriteLine (tfd.ToXmlString ());
 			Console.WriteLine (tfd);
@@ -146,6 +159,7 @@ namespace Tests {
 
 			Console.WriteLine (cfd.ToXmlString ());
 			Console.WriteLine (cfd);
+			*/
 		}
 
 		static void GetStampTest ()
@@ -172,7 +186,7 @@ namespace Tests {
 
 		static Comprobante CreateCFD ()
 		{
-			var cfd = new Comprobante {
+			var cfd = new Mictlanix.CFDv33.Comprobante {
 				TipoDeComprobante = c_TipoDeComprobante.Ingreso,
 				Serie = "A",
 				Folio = "1",

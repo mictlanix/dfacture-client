@@ -198,7 +198,7 @@ namespace Tests {
 				Receptor = new ComprobanteReceptor {
 					Rfc = "XAXX010101000",
 					Nombre = "DEMO COMPANY",
-					UsoCFDI = c_UsoCFDI.SinObligacionesFiscales,
+					UsoCFDI = c_UsoCFDI.SinEfectosFiscales,
 					RegimenFiscalReceptor=c_RegimenFiscal.SinObligacionesFiscales,
 					DomicilioFiscalReceptor= "03810"
 

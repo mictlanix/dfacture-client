@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Mictlanix.DFacture.Client</RootNamespace>
     <AssemblyName>Mictlanix.DFactureClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +31,6 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DFactureClient40.cs" />
@@ -44,11 +41,8 @@
     <Compile Include="DFactureClientException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\cfdlib\src\Mictlanix.CFDLib.csproj">
-      <Project>{63ebacd8-7bb0-480f-81bf-5e0690b27112}</Project>
+      <Project>{63EBACD8-7BB0-480F-81BF-5E0690B27112}</Project>
       <Name>Mictlanix.CFDLib</Name>
     </ProjectReference>
   </ItemGroup>
